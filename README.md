@@ -17,3 +17,4 @@ This code is designed to be an example of legacy code that works, but is nothing
 * Finally, I can change that TimeFormatterTest eMailForLocalTime, which can fail from time to time because sometimes the time will change when it takes the eMail a long time to fire up.  Let's change that to eMailForLocalTimeNoon using the ClockForTesting.
 * And now, I can remove the TimeFormatterTest methods for localTimeInWordsCurrent and zuluTimeInWordsCurrent, and replace them with *real* tests!
 * Wow.  I finally feel safe with that approximate time telling...
+* One final thing.  And we pass that "type" into formatTime as a parameter and then start using it in a switch statement.  That's wrong.  There is a formattedTime class that should be implemented as formattedTimeNumeric and formattedTimeApproximateWording.  DO THIS!!!

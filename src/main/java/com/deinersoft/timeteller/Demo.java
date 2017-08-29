@@ -8,18 +8,17 @@ public class Demo {
     public static void main(String [] args) {
 
         Email eMail = new Email();
-        TimeFormatter timeTeller = new TimeFormatter();
 
-        System.out.println(timeTeller.formatTime(new ClockLocal(), TimeZone.LOCAL, TimeFormattedAs.NUMERIC));
-        System.out.println(timeTeller.formatTime(new ClockUTC(), TimeZone.UTC, TimeFormattedAs.NUMERIC));
-        System.out.println(timeTeller.formatTime(new ClockLocal(), TimeZone.LOCAL, TimeFormattedAs.APPROXIMATE_WORDING));
-        System.out.println(timeTeller.formatTime(new ClockUTC(), TimeZone.UTC, TimeFormattedAs.APPROXIMATE_WORDING));
+        System.out.println(new TimeFormatterNumeric(new ClockLocal()).formatTime());
+        System.out.println(new TimeFormatterNumeric(new ClockUTC()).formatTime());
+        System.out.println(new TimeFormatterApproximateWording(new ClockLocal()).formatTime());
+        System.out.println(new TimeFormatterApproximateWording(new ClockUTC()).formatTime());
 
         try {
-            eMail.send(timeTeller.formatTime(new ClockLocal(), TimeZone.LOCAL, TimeFormattedAs.NUMERIC));
-            eMail.send(timeTeller.formatTime(new ClockUTC(), TimeZone.UTC, TimeFormattedAs.NUMERIC));
-            eMail.send(timeTeller.formatTime(new ClockLocal(), TimeZone.LOCAL, TimeFormattedAs.APPROXIMATE_WORDING));
-            eMail.send(timeTeller.formatTime(new ClockUTC(), TimeZone.UTC, TimeFormattedAs.APPROXIMATE_WORDING));
+            eMail.send(new TimeFormatterNumeric(new ClockLocal()).formatTime());
+            eMail.send(new TimeFormatterNumeric(new ClockUTC()).formatTime());
+            eMail.send(new TimeFormatterApproximateWording(new ClockLocal()).formatTime());
+            eMail.send(new TimeFormatterApproximateWording(new ClockUTC()).formatTime());
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }

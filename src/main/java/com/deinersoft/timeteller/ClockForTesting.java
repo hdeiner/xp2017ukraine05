@@ -5,7 +5,8 @@ public class ClockForTesting extends Clock {
     int minute;
     int second;
 
-    public ClockForTesting(int hour, int minute, int second) {
+    public ClockForTesting(int hour, int minute, int second, TimeZone timeZone) {
+        this.timeZone = timeZone;
         this.hour = hour;
         this.minute = minute;
         this.second = second;

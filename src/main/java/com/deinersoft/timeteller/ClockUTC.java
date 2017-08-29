@@ -6,6 +6,7 @@ public class ClockUTC extends Clock {
     LocalDateTime localDateTime = null;
 
     public ClockUTC() {
+        timeZone = TimeZone.UTC;
         localDateTime = LocalDateTime.now(java.time.Clock.systemUTC());
     }
 

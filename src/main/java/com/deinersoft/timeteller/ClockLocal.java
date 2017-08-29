@@ -6,6 +6,7 @@ public class ClockLocal extends Clock {
     LocalDateTime localDateTime = null;
 
     public ClockLocal() {
+        timeZone = TimeZone.UTC;
         localDateTime = LocalDateTime.now();
     }
 
