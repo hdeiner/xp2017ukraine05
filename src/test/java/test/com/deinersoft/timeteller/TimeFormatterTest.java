@@ -1,22 +1,24 @@
 package test.com.deinersoft.timeteller;
 
-import com.deinersoft.messenger.Email;
 import com.deinersoft.timeteller.*;
-import com.sun.mail.imap.IMAPFolder;
 import org.junit.Test;
 
-import javax.mail.*;
-import javax.mail.Flags.Flag;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-import java.util.concurrent.TimeUnit;
+import java.time.LocalDateTime;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TimeFormatterTest {
+
+    @Test
+    public void localTimeNumericNow(){
+        assertThat(new TimeFormatterNumeric(new ClockLocal()).formatTime(), is(getFormatTimeLocal()));
+    }
+
+    @Test
+    public void utcTimeNumericNow(){
+        assertThat(new TimeFormatterNumeric(new ClockUTC()).formatTime(), is(getFormatTimeUTC()));
+    }
 
     @Test
     public void localTimeNumeric102445(){
@@ -98,71 +100,12 @@ public class TimeFormatterTest {
        assertThat(new TimeFormatterApproximateWording(new ClockForTesting(12,1,5, TimeZone.LOCAL)).formatTime(), is("twelve in the afternoon"));
    }
 
-   @Test
-   public void emailForLocalTimeNoon(){
-       Email eMail = new Email();
+    private String getFormatTimeLocal() {
+        return String.format("%02d:%02d:%02d", LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());
+    }
 
-       try {
-           eMail.send(new TimeFormatterNumeric(new ClockForTesting(12,0,0, TimeZone.LOCAL)).formatTime());
-       } catch (MessagingException e) {
-           throw new RuntimeException(e);
-       }
+    private String getFormatTimeUTC() {
+        return String.format("%02d:%02d:%02d", LocalDateTime.now(java.time.Clock.systemUTC()).getHour(), LocalDateTime.now(java.time.Clock.systemUTC()).getMinute(), LocalDateTime.now(java.time.Clock.systemUTC()).getSecond())+"Z";
+    }
 
-       boolean receivedEmail = false;
-       for (int readAttempts = 1; (readAttempts <= 5) && (!receivedEmail); readAttempts++ ) {
-           receivedEmail = lookForTimeTellerEmail("12:00:00");
-       }
-       assertThat(receivedEmail, is(true));
-   }
-
-   private boolean lookForTimeTellerEmail(String localTimeNowFormatted){
-       Properties localProperties = new Properties();
-       try {
-           InputStream input = new FileInputStream("config.properties");
-           localProperties.load(input);
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
-
-       boolean receivedEmail = false;
-       IMAPFolder folder = null;
-       Store store = null;
-       try {
-           Properties props = System.getProperties();
-           props.setProperty("mail.store.protocol", "imaps");
-
-           Session session = Session.getDefaultInstance(props, null);
-           store = session.getStore("imaps");
-           store.connect(localProperties.getProperty("imap.host.to.use"),localProperties.getProperty("imap.username.to.use"), localProperties.getProperty("imap.password.to.use"));
-
-           folder = (IMAPFolder) store.getFolder("inbox");
-           if(!folder.isOpen()) {
-               folder.open(Folder.READ_WRITE);
-               Message[] messages = folder.getMessages();
-               for (Message msg : messages) {
-                   if (msg.getSubject().equals(localProperties.getProperty("email.subject"))) {
-                       if (((String) msg.getContent()).contains(localTimeNowFormatted)) {
-                           receivedEmail = true;
-                           msg.setFlag(Flag.DELETED, true);
-                       }
-                   }
-               }
-           }
-       }
-       catch (Exception e) { }
-       finally {
-           try {
-               if (folder != null && folder.isOpen()) folder.close(true);
-               if (store != null) store.close();
-           }
-           catch (Exception e) { }
-       }
-
-       if (!receivedEmail) {
-           try { TimeUnit.SECONDS.sleep(1); }
-           catch(InterruptedException e){ }
-       }
-
-       return receivedEmail;
-   }
 }

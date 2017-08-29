@@ -9,8 +9,13 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class Email {
+    String eMailConfigurationFile;
 
-    public void send(String formattedTime) throws MessagingException {
+    public Email(String eMailConfigurationFile) {
+        this.eMailConfigurationFile = eMailConfigurationFile;
+    }
+
+    public void send(String formattedTime) throws MessagingException, IOException {
         Properties localConfiguration = getLocalConfiguration();
         Session eMailSession = getEmailSession(localConfiguration);
         Message message = new MimeMessage(eMailSession);
@@ -32,15 +37,11 @@ public class Email {
                 });
     }
 
-    private Properties getLocalConfiguration() {
+    private Properties getLocalConfiguration() throws IOException {
         Properties localConfiguration = new Properties();
 
-        try {
-            InputStream input = new FileInputStream("config.properties");
-            localConfiguration.load(input);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        InputStream input = new FileInputStream(eMailConfigurationFile);
+        localConfiguration.load(input);
 
         return localConfiguration;
     }

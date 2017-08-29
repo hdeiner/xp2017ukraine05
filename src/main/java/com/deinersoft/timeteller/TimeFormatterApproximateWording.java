@@ -36,7 +36,7 @@ public class TimeFormatterApproximateWording extends TimeFormatter {
 
         formattedTime += " " + quadrantOfTheDay[hour/HOURS_IN_A_QUARTER_OF_A_DAY];
 
-        if (clock.timeZone == TimeZone.UTC) {
+        if (clock.getTimeZone() == TimeZone.UTC) {
             formattedTime += " Zulu";
         }
 

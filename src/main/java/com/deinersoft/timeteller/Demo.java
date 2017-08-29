@@ -3,11 +3,12 @@ package com.deinersoft.timeteller;
 import com.deinersoft.messenger.Email;
 
 import javax.mail.MessagingException;
+import java.io.IOException;
 
 public class Demo {
     public static void main(String [] args) {
 
-        Email eMail = new Email();
+        Email eMail = new Email("configEmail.properties");
 
         System.out.println(new TimeFormatterNumeric(new ClockLocal()).formatTime());
         System.out.println(new TimeFormatterNumeric(new ClockUTC()).formatTime());
@@ -20,7 +21,9 @@ public class Demo {
             eMail.send(new TimeFormatterApproximateWording(new ClockLocal()).formatTime());
             eMail.send(new TimeFormatterApproximateWording(new ClockUTC()).formatTime());
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

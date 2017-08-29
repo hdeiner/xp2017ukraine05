@@ -6,9 +6,4 @@ public class TimeFormatter {
     public TimeFormatter(Clock clock) {
         this.clock = clock;
     }
-
-    public String formatTime() {
-        return "";
-    }
-
 }

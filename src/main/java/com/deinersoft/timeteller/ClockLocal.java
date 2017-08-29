@@ -10,9 +10,7 @@ public class ClockLocal extends Clock {
         localDateTime = LocalDateTime.now();
     }
 
-    public int getHour() {
-        return localDateTime.getHour();
-    }
+    public int getHour() { return localDateTime.getHour(); }
 
     public int getMinute() {
         return localDateTime.getMinute();

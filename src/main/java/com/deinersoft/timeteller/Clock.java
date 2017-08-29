@@ -10,4 +10,6 @@ public class Clock {
     public int getMinute() { return 0; }
 
     public int getSecond() { return 0; }
+
+    public TimeZone getTimeZone() { return timeZone; }
 }
