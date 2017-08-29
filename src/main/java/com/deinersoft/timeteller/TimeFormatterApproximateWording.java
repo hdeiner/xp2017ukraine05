@@ -14,6 +14,10 @@ public class TimeFormatterApproximateWording extends TimeFormatter {
     public String formatTime(){
         String formattedTime = "";
 
+        int hour = clock.getHour();
+        int minute = clock.getMinute();
+        int second = clock.getSecond();
+
         String[] namesOfTheHours = {"twelve", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven"};
         String[] fuzzyTimeWords = {"", "almost ten after", "ten after", "a quarter after", "twenty after", "almost half past", "half past", "almost twenty before", "twenty before", "a quarter of", "ten of", "almost"};
         String[] quadrantOfTheDay = {"at night", "in the morning", "in the afternoon", "in the evening"};

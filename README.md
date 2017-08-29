@@ -19,3 +19,10 @@ This code is designed to be an example of legacy code that works, but is nothing
 * Wow.  I finally feel safe with that approximate time telling...
 * One final thing.  And we pass that "type" into formatTime as a parameter and then start using it in a switch statement.  That's wrong.  There is a formattedTime class that should be implemented as formattedTimeNumeric and formattedTimeApproximateWording.
 * And while we're here, take a look at Clock and how we use the subclasses in TimeFormatter.  When you think about it, a clock has a TimeZone.  All except for a ClockForTesting, which must be told what TimeZone it is faking.  The subclasses know which TimeZone they are from, and can then TimeFormatter can make use of that when it comes time to deal with Zulu times.
+
+#### So, how do you know when you're done?
+* Well, you never really are.  There are always improvements to be make.
+* But there are two main things that we are doing when refactoring legacy code.  And they work together.
+* The first is to make the code understandable.  Part of that is craftsmanship in the code.  And the other part are the small unit tests which give easy to follow snippets of how to use the code.
+* And the other thing that we do when refactoring legacy code is to make the code safe to refactor deeper, and therefore make it easier to extend.
+* I'm at the point now where I think I understand the code and it reads more like a book.  I'll stop here for now.
