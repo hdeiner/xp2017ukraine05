@@ -6,7 +6,7 @@ import javax.mail.MessagingException;
 import java.io.IOException;
 
 public class Demo {
-    public static void main(String [] args) {
+    public static void main(String [] args) throws MessagingException, IOException{
 
         Email eMail = new Email("configEmail.properties");
 
@@ -15,16 +15,11 @@ public class Demo {
         System.out.println(new TimeFormatterApproximateWording(new ClockLocal()).formatTime());
         System.out.println(new TimeFormatterApproximateWording(new ClockUTC()).formatTime());
 
-        try {
-            eMail.send(new TimeFormatterNumeric(new ClockLocal()).formatTime());
-            eMail.send(new TimeFormatterNumeric(new ClockUTC()).formatTime());
-            eMail.send(new TimeFormatterApproximateWording(new ClockLocal()).formatTime());
-            eMail.send(new TimeFormatterApproximateWording(new ClockUTC()).formatTime());
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        eMail.send(new TimeFormatterNumeric(new ClockLocal()).formatTime());
+        eMail.send(new TimeFormatterNumeric(new ClockUTC()).formatTime());
+        eMail.send(new TimeFormatterApproximateWording(new ClockLocal()).formatTime());
+        eMail.send(new TimeFormatterApproximateWording(new ClockUTC()).formatTime());
+
     }
 
 }
