@@ -32,32 +32,32 @@ public class TimeFormatterTest {
 
    @Test
    public void zuluTimeInWords000005(){
-       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(0,0,5, TimeZone.UTC)).formatTime(), is("twelve at night Zulu"));
+       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(0,0,5, TimeZone.UTC)).formatTime(), is("about twelve at night Zulu"));
    }
 
    @Test
    public void localTimeInWords000005(){
-       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(0,0,5, TimeZone.LOCAL)).formatTime(), is("twelve at night"));
+       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(0,0,5, TimeZone.LOCAL)).formatTime(), is("about twelve at night"));
    }
 
-   @Test
-   public void localTimeInWords090239(){
-       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(9,2,39, TimeZone.LOCAL)).formatTime(), is("almost ten after nine in the morning"));
-   }
+    @Test
+    public void localTimeInWords090239(){
+        assertThat(new TimeFormatterApproximateWording(new ClockForTesting(9,2,39, TimeZone.LOCAL)).formatTime(), is("a little after nine in the morning"));
+    }
 
-   @Test
-   public void localTimeInWords090949(){
-       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(9,9,49, TimeZone.LOCAL)).formatTime(), is("ten after nine in the morning"));
-   }
+    @Test
+    public void localTimeInWords090949(){
+       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(9,9,49, TimeZone.LOCAL)).formatTime(), is("about ten after nine in the morning"));
+    }
 
    @Test
    public void localTimeInWords091702(){
-       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(9,17,2, TimeZone.LOCAL)).formatTime(), is("a quarter after nine in the morning"));
+       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(9,17,2, TimeZone.LOCAL)).formatTime(), is("about a quarter after nine in the morning"));
    }
 
    @Test
    public void localTimeInWords091902(){
-       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(9,19,2, TimeZone.LOCAL)).formatTime(), is("twenty after nine in the morning"));
+       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(9,19,2, TimeZone.LOCAL)).formatTime(), is("about twenty after nine in the morning"));
    }
 
    @Test
@@ -67,7 +67,7 @@ public class TimeFormatterTest {
 
    @Test
    public void localTimeInWords093112(){
-       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(9,31,12, TimeZone.LOCAL)).formatTime(), is("half past nine in the morning"));
+       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(9,31,12, TimeZone.LOCAL)).formatTime(), is("about half past nine in the morning"));
    }
 
    @Test
@@ -77,17 +77,17 @@ public class TimeFormatterTest {
 
    @Test
    public void localTimeInWords093823(){
-       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(9,38,23, TimeZone.LOCAL)).formatTime(), is("twenty before ten in the morning"));
+       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(9,38,23, TimeZone.LOCAL)).formatTime(), is("about twenty before ten in the morning"));
    }
 
    @Test
    public void localTimeInWords094145(){
-       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(9,43,45, TimeZone.LOCAL)).formatTime(), is("a quarter of ten in the morning"));
+       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(9,43,45, TimeZone.LOCAL)).formatTime(), is("about a quarter of ten in the morning"));
    }
 
    @Test
    public void localTimeInWords094945(){
-       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(9,49,45, TimeZone.LOCAL)).formatTime(), is("ten of ten in the morning"));
+       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(9,49,45, TimeZone.LOCAL)).formatTime(), is("about ten of ten in the morning"));
    }
 
    @Test
@@ -97,7 +97,7 @@ public class TimeFormatterTest {
 
    @Test
    public void localTimeInWords120105(){
-       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(12,1,5, TimeZone.LOCAL)).formatTime(), is("twelve in the afternoon"));
+       assertThat(new TimeFormatterApproximateWording(new ClockForTesting(12,1,5, TimeZone.LOCAL)).formatTime(), is("about twelve in the afternoon"));
    }
 
     private String getFormatTimeLocal() {
